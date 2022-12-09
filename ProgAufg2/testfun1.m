@@ -4,7 +4,7 @@ function [y] = testfun1 (x)
 y = zeros(length(x),1);
 
 for i = 1:length(x)
-    y(i) = sqrt(x(i));
+    y(i) = sqrt(abs(x(i)));
 end
 
   
