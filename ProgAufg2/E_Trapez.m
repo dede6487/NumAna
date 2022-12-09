@@ -6,7 +6,7 @@ function [I, exitflag] = E_Trapez(fun, a, b, m_max, N0, e)
   end
 
   if nargin < 6
-    e = 1.0000e-10
+    e = 1.e-10
     if nargin < 5
       N0 = ceil((b-a)/0.1)
       if nargin < 4
