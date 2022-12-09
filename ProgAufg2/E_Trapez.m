@@ -21,6 +21,7 @@ function [I, exitflag] = E_Trapez(fun, a, b, m_max, N0, e)
   % F_00
   h_0 = (b - a) / N0
   f_a = fun(a)
+  f_b = fun(b)
   T_00 = f_a / 2
 
   for z = a+h_0:h_0:b-h_0
