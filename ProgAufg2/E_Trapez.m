@@ -15,11 +15,9 @@ function [I, exitflag] = E_Trapez(fun, a, b, m_max, N0, e)
     end
   end
 
-  m = 2;
   F = 0;
 
   % F_00
-  h_0 = (b - a) / N0
   f_a = fun(a)
   f_b = fun(b)
   %T_00 = f_a / 2
@@ -27,7 +25,7 @@ function [I, exitflag] = E_Trapez(fun, a, b, m_max, N0, e)
   H = zeros(m_max,1);s
 
   %calculating h
-  H(1) = h_0;   %is h_0
+  H(1) = (b - a) / N0;   %is h_0
   H(2) = H(1)/2; %is h_1
   H(3) = H(2)/3; %is h_2
   
@@ -67,6 +65,7 @@ function [I, exitflag] = E_Trapez(fun, a, b, m_max, N0, e)
     
     %now calculate the full tableau
 
+    
     
   end
 
