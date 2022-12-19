@@ -1,0 +1,89 @@
+\documentclass[11pt,titlepage]{article}
+
+%Laenderspezifische Einstellungen bzgl. Rechtschreibung, Sonderzeichen und Kodierung
+\usepackage[utf8]{inputenc}
+\usepackage[naustrian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{graphicx}
+%\usepackage{subcaption}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{courier}
+\usepackage{matlab-prettifier}
+\definecolor{light-gray}{gray}{0.85}
+\lstset{
+language=C++,
+numbers=left,
+style=Matlab-editor,
+basicstyle=\mlttfamily,
+breaklines=true,
+backgroundcolor=\color{light-gray},
+tabsize=2,
+basicstyle=\footnotesize\ttfamily,
+frame=single,
+inputencoding=utf8,
+extendedchars=true,
+showstringspaces=false,
+literate =
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+	{ü}{{\"u}}1
+	{Ä}{{\"A}}1
+	{Ö}{{\"O}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ₙ}{{$_n$}}1
+}
+
+\def\ContinueLineNumber{\lstset{firstnumber=last}}
+\def\StartLineAt#1{\lstset{firstnumber=#1}}
+
+\usepackage[
+	a4paper,
+	top = 2cm,
+	bottom = 2 cm,
+	left = 2cm,
+	right = 2cm,
+	headheight = 15pt,
+	includeheadfoot
+	]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[english]{varioref}
+\usepackage{hyperref}
+
+\fancypagestyle{fancy}{
+	\fancyhead[R]{Page \thepage}
+	\fancyhead[L]{\leftmark}
+	\renewcommand{\headrulewidth}{1.25pt}
+
+	\fancyfoot[L]{\tiny{Num. Ana. - Übung 1 , created: \today}}
+	\fancyfoot[R]{\tiny{Felix Dreßler (k12105003), Elisabeth Köberle (k12110408), Ricardo}}
+	\cfoot{}
+	\renewcommand{\footrulewidth}{1.25pt}
+}
+
+\setlength{\headsep}{10mm}
+\setlength{\footskip}{10mm}
+
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{1.1ex plus0.25ex minus0.25ex}
+\setlength{\tabcolsep}{0.2cm} % for the horizontal padding
+
+\pagestyle{fancy}
+
+\title{Num. Ana. - Übung 1}
+\author{Felix Dreßler (k12105003) \\ Elisabeth Köberle (k12110408) \\ Ricardo}
+\date{\today} %Erstellungsdatum
+
+\begin{document}
+\maketitle
+
+	anstatt die werte speicheraufwendig in einer matrix zu speichern könnte man auch auf einen vektor zurückgreifen, da die angabe jedoch explizit auf die ausrechnung des kompletten tableaus besteht wurde eine matrix verwendet
+		
+			
+
+\end{document}
