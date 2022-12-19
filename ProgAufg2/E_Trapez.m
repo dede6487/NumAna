@@ -22,43 +22,89 @@ if nargin < 6
     end
 end
 
-H = zeros(m_max,1);
+H = zeros(m_max+1,1);
 
 %calculating h
 H(1) = (b - a) / N0;   %is h_0
 H(2) = H(1)/2; %is h_1
 H(3) = H(2)/3; %is h_2
    
+T = zeros(m_max+1, m_max+1);
+
+%initializing T(0,0), T(1,0), T(2,0), here T(1,1), T(2,1), ...
+x = zeros(N0 * 6,1);
+
+%T(0,0), T(1,1)
+for i = 1:N0
+        x(i) = a + (i-1) * H(1);
+end
+
+f_values = fun(x);
+F = max(abs(f_values));
+
+
+T(1,1) = f_values(1)/2;
+T(1,1) = T(1,1) + f_values(N0)/2;
+for j = 2:N0-1
+    T(1,1) = T(1,1) + f_values(j);
+end
+
+%T(1,0), T(2,1)
+for i = 1:N0*2
+        x(i) = a + (i-1) * H(2);
+end
+
+f_values = fun(x);
+if max(abs(f_values)) > F
+    F = max(abs(f_values));
+end
+
+T(2,1) = f_values(1)/2;
+T(2,1) = T(2,1) + f_values(N0)/2;
+for j = 2:N0*2-1
+    T(2,1) = T(2,1) + f_values(j);
+end
+
+%T(2,0), T(3,1)
+for i = 1:N0*6
+        x(i) = a + (i-1) * H(3);
+end
+
+f_values = fun(x);
+if max(abs(f_values)) > F
+    F = max(abs(f_values));
+end
+
+T(3,1) = f_values(1)/2;
+T(3,1) = T(3,1) + f_values(N0)/2;
+for j = 2:N0*6-1
+    T(3,1) = T(3,1) + f_values(j);
+end
+
 for m = 2:m_max
-    %for every time m gets increased, add H(m+1)
-    %(+1) because vectors start with 1 and not 0
-    H(m+1) = H(m)/2;
- 
+    H(m+2) = H(m+1)/2;
+    
     %startvector
-    %for m = 0 we just have N0 elements in there
-    %for m = 1 N0*2 elements
-    %for m = 2 N0*2*3 elements, from there on it doubles with every m
 
-    l = 6*N0*(2)^(m-2)+1;
+    l = 6*N0*(2)^(m-2);
 
-    %initial values for f
+    %calculating T(m+2,1)
+
     x = zeros(l,1);
 
     for i = 1:l
-        x(i) = i * H(m);
+        x(i) = a + (i-1) * H(m+2);
     end
-
+    
     f_values = fun(x);
-
-    %initial values for Ti0
-    T = zeros(l, l);
-
-    for i = 1:l
-        T(i,1) = f_values(1)/2;
-        T(i,1) = T(i,1) + f_values(l)/2;
-        for j = 2:l-1
-            T(i,1) = T(i,1) + f_values(j);
-        end
+    if max(abs(f_values)) > F
+        F = max(abs(f_values));
+    end
+    
+    T(m+2,1) = f_values(1)/2;
+    T(m+2,1) = T(m+2,1) + f_values(N0)/2;
+    for j = 2:N0*6-1
+        T(m+2,1) = T(m+2,1) + f_values(j);
     end
 
     %first calculate the full tableau
@@ -67,13 +113,12 @@ for m = 2:m_max
     %starting from 2 because column 1 is Ti0
     for k = 2:m+1
         for i = k:m+1
-           T(i,k) = T(i,k-1) + (T(i,k-1)-T(i-1,k-1))/((H(i-k)/H(i))*(H(i-k)/H(i))-1); 
+            T(i,k) = T(i,k-1) + (T(i,k-1)-T(i-1,k-1))/((H(i-k+1)/H(i))*(H(i-k+1)/H(i))-1);
         end
     end
 
     %then check for termination criteria
 
-    F = max(f_values);
     s = abs(b-a)*F;
 
     for k = 2:m+1
@@ -85,7 +130,6 @@ for m = 2:m_max
             end
         end
     end
-
 end
 
 I = T(m_max+1,m_max+1);
