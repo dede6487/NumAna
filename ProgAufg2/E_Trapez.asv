@@ -61,23 +61,22 @@ for m = 2:m_max
         end
     end
 
+    F = max(f_values);
+    s = abs(b-a)*F;
+
     %first calculate the full tableau
     %this results in T being a lower left triangle matrix
     
-    %starting from 2 because column 1 is Ti0
-    for k = 2:m+1
-        for i = k:m+1
+    for k = 1:m+1
+        for i = k:m
            T(i,k) = T(i,k-1) + (T(i,k-1)-T(i-1,k-1))/((H(i-k)/H(i))*(H(i-k)/H(i))-1); 
         end
     end
 
     %then check for termination criteria
 
-    F = max(f_values);
-    s = abs(b-a)*F;
-
-    for k = 2:m+1
-        for i = k:m+1
+    for k = 1:m
+        for i = k:m
             if abs(T(i+1,k)-T(i,k)) <= e*s
                 I = T(i+1,k+1);
                 exitflag = 0;
@@ -87,7 +86,5 @@ for m = 2:m_max
     end
 
 end
-
-I = T(m_max+1,m_max+1);
 
 end
