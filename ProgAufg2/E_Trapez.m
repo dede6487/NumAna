@@ -117,7 +117,7 @@ for m = 2:m_max
     %this results in T being a lower left triangle matrix
     
     %starting from 2 because column 1 is Ti0
-    for k = 2:m+1 %max(2,m-4)
+    for k = max(2,m-4):m+1
         for i = k:m+1
             T(i,k) = T(i,k-1) + (T(i,k-1)-T(i-1,k-1))/((H(i-k+1)/H(i))*(H(i-k+1)/H(i))-1);
         end
