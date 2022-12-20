@@ -32,7 +32,7 @@ H(3) = H(2)/3; %is h_2
 T = zeros(m_max+1, m_max+1);
 
 %initializing T(0,0), T(1,0), T(2,0), here T(1,1), T(2,1), ...
-x = zeros(N0 * 6+1,1);
+x = zeros(N0 * 6+1,1);  %max length of x is for the first three T will is 6*N0 + 1
 
 %T(0,0), T(1,1)
 for i = 1:N0+1

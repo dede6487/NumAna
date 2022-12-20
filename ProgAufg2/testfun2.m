@@ -4,5 +4,5 @@ function [y] = testfun2 (x)
 y = zeros(length(x),1);
 
 for i = 1:length(x)
-    y(i) = sin(x(i));
+    y(i) = sin(x(i,1));
 end
