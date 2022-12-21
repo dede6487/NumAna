@@ -8,10 +8,6 @@ if nargin < 3
   return;
 end
 
-%
-%sanity checks for loop iterators need to be done!!!!!!!!!!!!!
-%
-
 if nargin < 6
     e = 1.e-10;
     if nargin < 5
@@ -34,14 +30,13 @@ T = zeros(m_max+1, m_max+1);
 %initializing T(0,0), T(1,0), T(2,0), here T(1,1), T(2,1), ...
 x = zeros(N0 * 6+1,1);  %max length of x is for the first three T will is 6*N0 + 1
 
-%T(0,0), T(1,1)
+%T(0,0) , T(1,1)
 for i = 1:N0+1
         x(i) = a + (i-1) * H(1);
 end
 
 f_values = fun(x);
 F = max(abs(f_values));
-
 
 T(1,1) = f_values(1)/2;
 T(1,1) = T(1,1) + f_values(N0)/2;
@@ -117,7 +112,7 @@ for m = 2:m_max
     %this results in T being a lower left triangle matrix
     
     %starting from 2 because column 1 is Ti0
-    for k = max(2,m-4):m+1
+    for k = max(2,m-m_max+2):m+1 %doesn't need to reclaculate the full tableau
         for i = k:m+1
             T(i,k) = T(i,k-1) + (T(i,k-1)-T(i-1,k-1))/((H(i-k+1)/H(i))*(H(i-k+1)/H(i))-1);
         end

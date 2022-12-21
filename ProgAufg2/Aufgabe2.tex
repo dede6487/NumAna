@@ -86,7 +86,7 @@ literate =
 		\begin{displaymath}
 			\int_{-1.25}^1 \sqrt{|x|} \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) sqrt(abs(x))
 			
@@ -104,15 +104,36 @@ literate =
 		\end{lstlisting}
 		Nun testen wir unsere Funktion mit Standardwerten.
 		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun1, -1.25, 1)
 			
+			I =
+			
+			1.598399277022473
+			
+			
+			exitflag =
+			
+			1
 		\end{lstlisting}
-		
+		24 m_max____________________________________________________________________________________________________________
+		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun1, -1.25, 1, 24)
+			
+			I =
+			
+			1.598361657434845
+			
+			
+			exitflag =
+			
+			0
+		\end{lstlisting}
 		
 	\section{Testfunktion 2}
 		\begin{displaymath}
 			\int_0^{\pi} sin(x) \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) sin(x)
 			
@@ -128,12 +149,25 @@ literate =
 			
 			2.000000000000000
 		\end{lstlisting}
-
+		Abweichung an der 15ten Nachkommastelle
+		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun2, 0, pi)
+			
+			I =
+			
+			2.000000000000008
+			
+			
+			exitflag =
+			
+			0
+		\end{lstlisting}
+	
 	\section{Testfunktion 3}
 		\begin{displaymath}
 			\int_{1.1}^{3.7} e^{x} - \dfrac{x^2}{2}  \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) exp(x)-(x.^2)/2
 			
@@ -149,13 +183,39 @@ literate =
 			
 			29.222805002787631
 		\end{lstlisting}
+		konvergiert noch nicht
+		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun3, 1.1, 3.7)
+			
+			I =
+			
+			29.212897596611022
+			
+			
+			exitflag =
+			
+			1
+		\end{lstlisting}
+		genauigkeit runter weil sonst >>50 iterationsschritte
+		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun3, 1.1, 3.7, 6, ceil((3.7-1.1)/0.1), 1.e-3)
+			
+			I =
+			
+			29.182340731811546
+			
+			
+			exitflag =
+			
+			0
+		\end{lstlisting}
 
 	\section{Testfunktion 4}
-		Da wir vor allem bei \glqq einfachen\grqq Funktionen genaue Ergebnisse gewünscht sind, testen wir auch solche:
+		Da wir vor allem bei \glqq einfachen\grqq  Funktionen genaue Ergebnisse gewünscht sind, testen wir auch solche:
 		\begin{displaymath}
 			\int_{0}^1 x \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) x
 			
@@ -171,13 +231,39 @@ literate =
 			
 			0.500000000000000
 		\end{lstlisting}
+	auch 20 nicht konvergiert
+		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun4, 0, 1, 20)
+			
+			I =
+			
+			0.499999980635652
+			
+			
+			exitflag =
+			
+			1
+		\end{lstlisting}
+		genauigkeit
+		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun4, 0, 1, 6, ceil((1)/0.1), 1.e-3)
+			
+			I =
+			
+			0.499351851851852
+			
+			
+			exitflag =
+			
+			0
+		\end{lstlisting}
 
 	\section{Testfunktion 5}
 		Schnell wachsende Integrale sind ebenfalls Interessant zu betrachten:
 		\begin{displaymath}
 			\int_{0}^7 2^x \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) 2.^x
 			
@@ -193,13 +279,28 @@ literate =
 			
 			1.832222701928983e+02
 		\end{lstlisting}
+		\begin{lstlisting}
+			
+		\end{lstlisting}
+		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun5, 0, 1, 6, ceil((1)/0.1), 1.e-3)
+			
+			I =
+			
+			1.441398244528734
+			
+			
+			exitflag =
+			
+			0
+		\end{lstlisting}
 
 	\section{Testfunktion 6}
 		Als letzte Testfunktion wurde folgende Funktion gewählt:
 		\begin{displaymath}
 			\int_{-1}^1  x^2 \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) x.^2
 			
@@ -214,6 +315,9 @@ literate =
 			ans =
 			
 			0.666666666666667
+		\end{lstlisting}
+		\begin{lstlisting}
+			
 		\end{lstlisting}
 			
 \end{document}
