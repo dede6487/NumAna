@@ -86,7 +86,7 @@ literate =
 		\begin{displaymath}
 			\int_{-1.25}^1 \sqrt{|x|} \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq \, das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) sqrt(abs(x))
 			
@@ -115,7 +115,7 @@ literate =
 			
 			1
 		\end{lstlisting}
-		24 m_max____________________________________________________________________________________________________________
+		Mit $m_{max} = 6$ konvergiert das Verfahren noch nicht zufriedenstellen, dazu benötigen wir $m_{max} = 24$:
 		\begin{lstlisting}
 			>> [I, exitflag] = E_Trapez(@testfun1, -1.25, 1, 24)
 			
@@ -128,12 +128,13 @@ literate =
 			
 			0
 		\end{lstlisting}
+		Die Lösung unterscheidet sich jedoch noch in der sechsten Nachkommastelle von der Matlab Lösung.
 		
 	\section{Testfunktion 2}
 		\begin{displaymath}
 			\int_0^{\pi} sin(x) \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq \, das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) sin(x)
 			
@@ -149,7 +150,7 @@ literate =
 			
 			2.000000000000000
 		\end{lstlisting}
-		Abweichung an der 15ten Nachkommastelle
+		Nun testen wir unsere Funktion mit Standardwerten.
 		\begin{lstlisting}
 			>> [I, exitflag] = E_Trapez(@testfun2, 0, pi)
 			
@@ -162,12 +163,13 @@ literate =
 			
 			0
 		\end{lstlisting}
+		Hier erhalten wir eine Abweichung an der 15-ten Nachkommastelle zum Matlab Ergebnis.
 	
 	\section{Testfunktion 3}
 		\begin{displaymath}
 			\int_{1.1}^{3.7} e^{x} - \dfrac{x^2}{2}  \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq \, das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) exp(x)-(x.^2)/2
 			
@@ -183,7 +185,7 @@ literate =
 			
 			29.222805002787631
 		\end{lstlisting}
-		konvergiert noch nicht
+		Nun testen wir unsere Funktion mit Standardwerten.
 		\begin{lstlisting}
 			>> [I, exitflag] = E_Trapez(@testfun3, 1.1, 3.7)
 			
@@ -196,7 +198,8 @@ literate =
 			
 			1
 		\end{lstlisting}
-		genauigkeit runter weil sonst >>50 iterationsschritte
+		Um das Abbruchskriterium des Verfahrens zu erreichen musste hier entweder $m_{max}$ sehr groß gewählt oder die Genauigkeit verringert werden.
+		Mit verringerter Genauigkeit ist das Ergebnis jedoch wie hier ersichtlich schon ungenauer, als bei obiger Ausführung.
 		\begin{lstlisting}
 			>> [I, exitflag] = E_Trapez(@testfun3, 1.1, 3.7, 6, ceil((3.7-1.1)/0.1), 1.e-3)
 			
@@ -209,13 +212,13 @@ literate =
 			
 			0
 		\end{lstlisting}
-
+		
 	\section{Testfunktion 4}
-		Da wir vor allem bei \glqq einfachen\grqq  Funktionen genaue Ergebnisse gewünscht sind, testen wir auch solche:
+		Da wir vor allem bei \glqq einfachen\grqq \, Funktionen genaue Ergebnisse gewünscht sind, testen wir auch solche:
 		\begin{displaymath}
 			\int_{0}^1 x \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq \, das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) x
 			
@@ -231,7 +234,7 @@ literate =
 			
 			0.500000000000000
 		\end{lstlisting}
-	auch 20 nicht konvergiert
+		Auch mit $m_{max} = 20$ bricht das Programm noch mit $exitflag = 1$ ab.
 		\begin{lstlisting}
 			>> [I, exitflag] = E_Trapez(@testfun4, 0, 1, 20)
 			
@@ -244,7 +247,7 @@ literate =
 			
 			1
 		\end{lstlisting}
-		genauigkeit
+		Deshalb verringern wir hier auch die Genauigkeit.
 		\begin{lstlisting}
 			>> [I, exitflag] = E_Trapez(@testfun4, 0, 1, 6, ceil((1)/0.1), 1.e-3)
 			
@@ -261,9 +264,9 @@ literate =
 	\section{Testfunktion 5}
 		Schnell wachsende Integrale sind ebenfalls Interessant zu betrachten:
 		\begin{displaymath}
-			\int_{0}^7 2^x \, dx\
+			\int_{0}^1 2^x \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq \, das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) 2.^x
 			
@@ -273,15 +276,26 @@ literate =
 			
 			@(x)2.^x
 			
-			>> integral(fun, 0, 7)
+			>> integral(fun, 0, 1)
 			
 			ans =
 			
-			1.832222701928983e+02
+			1.442695040888963
 		\end{lstlisting}
+		Nun testen wir unsere Funktion mit Standardwerten.
 		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun5, 0, 1)
 			
+			I =
+			
+			1.442377527965380
+			
+			
+			exitflag =
+			
+			1
 		\end{lstlisting}
+		Das Programm bricht mit $exitflag = 1$ ab, deshalb verringern wir die Genauigkeit.
 		\begin{lstlisting}
 			>> [I, exitflag] = E_Trapez(@testfun5, 0, 1, 6, ceil((1)/0.1), 1.e-3)
 			
@@ -300,7 +314,7 @@ literate =
 		\begin{displaymath}
 			\int_{-1}^1  x^2 \, dx\
 		\end{displaymath}
-		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq  das numerische Ergebnis des Integrals.
+		Zuerst berechnen wir mithilfe der Matlab-Funktion \glqq integral\grqq \, das numerische Ergebnis des Integrals.
 		\begin{lstlisting}
 			>> fun = @(x) x.^2
 			
@@ -316,8 +330,47 @@ literate =
 			
 			0.666666666666667
 		\end{lstlisting}
+		Nun testen wir unsere Funktion mit Standardwerten.
 		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun6, -1, 1)
+			
+			I =
+			
+			0.666666541732919
+			
+			
+			exitflag =
+			
+			1
+		\end{lstlisting}
+		Da das Programm wieder mit $exitflag = 1$ abbricht, deshalb erhöhen wir $m_{max}$
+		\begin{lstlisting}
+			>> [I, exitflag] = E_Trapez(@testfun6, -1, 1, 11)
+			
+			I =
+			
+			0.666666666662302
+			
+			
+			exitflag =
+			
+			0
 			
 		\end{lstlisting}
+		Mit $m_{max} = 11$ bricht das Programm erfolgreich ab.
+		
+	\section{Resultate}
+		 Wenn das Programm mit den Standardwerten erfolgreich abbricht, erhalten wir duchaus genau Ergebnise in relativ kurzer Zeit. Erhöhen wir jedoch $m_{max}$ kann das Verfahren schnell einiges an Systemressourcen benötigen.
+		 
+		 Beispielsweise könnten wir bei der dritten Testfunktion anstatt der Verringerung der Genauiggkeit auch $m_{max}$ erhöhen. Das führt jedoch schnell zu einem erheblichen RAM-Verbrauch. 
+		 
+		 Versuchen wir nämlich die Funktion mit $m_{max} = 50$ auszuführen, werden schnell bis zu 30 GB RAM verwendet, der Vorgang dauert ebenso sehr lange. (Vermutung - Matlab greift auf viel langsamere \glqq swap-memory\grqq \, zu)
+		 	 
+		 Vermutlich resultiert dieser Verbrauch daraus, dass wir zuerst für jedes $m$ das ganze Tableau speichern müssen. Das könnte vermutlich durch eine etwas abgeänderte Abbruchsvorschrift gelöst werden.
+		 
+		 Das ganze Tableau zu speichern hat natürlich den Vorteil, dass dadurch pro Iterationsschritt über m die bereits berechneten Werte nicht neu berechnet werden müssen.
+		 
+		 Ebenfalls ergibt sich ein Speicher-Overhead durch das Speichern der linken unteren Dreiecksmatrix T, welche noch viele unnötig gespeicherte Nullen enthält.
+		
 			
 \end{document}

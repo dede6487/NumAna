@@ -4,7 +4,7 @@ function [y] = testfun6 (x)
 y = zeros(length(x),1);
 
 for i = 1:length(x)
-    y(i,1) = x.^2;
+    y(i,1) = x(i,1).^2;
 end
 
   
