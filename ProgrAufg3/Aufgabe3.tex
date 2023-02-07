@@ -1,0 +1,182 @@
+\documentclass[11pt,titlepage]{article}
+
+%Laenderspezifische Einstellungen bzgl. Rechtschreibung, Sonderzeichen und Kodierung
+\usepackage[utf8]{inputenc}
+\usepackage[naustrian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{graphicx}
+%\usepackage{subcaption}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{courier}
+\usepackage{matlab-prettifier}
+\definecolor{light-gray}{gray}{0.85}
+\lstset{
+language=C++,
+numbers=left,
+style=Matlab-editor,
+basicstyle=\mlttfamily,
+breaklines=true,
+backgroundcolor=\color{light-gray},
+tabsize=2,
+basicstyle=\footnotesize\ttfamily,
+frame=single,
+inputencoding=utf8,
+extendedchars=true,
+showstringspaces=false,
+literate =
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+	{ü}{{\"u}}1
+	{Ä}{{\"A}}1
+	{Ö}{{\"O}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ₙ}{{$_n$}}1
+}
+
+\def\ContinueLineNumber{\lstset{firstnumber=last}}
+\def\StartLineAt#1{\lstset{firstnumber=#1}}
+
+\usepackage[
+	a4paper,
+	top = 2cm,
+	bottom = 2 cm,
+	left = 2cm,
+	right = 2cm,
+	headheight = 15pt,
+	includeheadfoot
+	]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[english]{varioref}
+\usepackage{hyperref}
+
+\fancypagestyle{fancy}{
+	\fancyhead[R]{Page \thepage}
+	\fancyhead[L]{\leftmark}
+	\renewcommand{\headrulewidth}{1.25pt}
+
+	\fancyfoot[L]{\tiny{Num. Ana. - Übung 2 , created: \today}}
+	\fancyfoot[R]{\tiny{Felix Dreßler (k12105003), Elisabeth Köberle (k12110408), Ricardo Holzapfel (k11942080)}}
+	\cfoot{}
+	\renewcommand{\footrulewidth}{1.25pt}
+}
+
+\setlength{\headsep}{10mm}
+\setlength{\footskip}{10mm}
+
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{1.1ex plus0.25ex minus0.25ex}
+\setlength{\tabcolsep}{0.2cm} % for the horizontal padding
+
+\pagestyle{fancy}
+
+\title{Num. Ana. - Übung 2}
+\author{Felix Dreßler (k12105003) \\ Elisabeth Köberle (k12110408) \\ Ricardo Holzapfel (k11942080)}
+\date{\today} %Erstellungsdatum
+
+\begin{document}
+\maketitle
+	
+	
+	
+	erstes ist mu = 0,1 und zweites je mit mu = 0,5
+	bricht schneller ab
+	\begin{lstlisting}
+		[x, exitflag, iter, f_eval] = solveEq(@F1, transpose(x0))
+		
+		x =
+		
+		-2.7720
+		2.0391
+		
+		
+		exitflag =
+		
+		0
+		
+		
+		iter =
+		
+		16
+		
+		
+		f_eval =
+		
+		18
+		
+		>> [x, exitflag, iter, f_eval] = solveEq(@F1, transpose(x0))
+		
+		x =
+		
+		-2.7720
+		2.0391
+		
+		
+		exitflag =
+		
+		0
+		
+		
+		iter =
+		
+		16
+		
+		
+		f_eval =
+		
+		18
+		
+		>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
+		
+		x =
+		
+		6.1017e-09
+		
+		
+		exitflag =
+		
+		1
+		
+		
+		iter =
+		
+		30
+		
+		
+		f_eval =
+		
+		425
+		
+		>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
+		
+		x =
+		
+		1.1243e-07
+		
+		
+		exitflag =
+		
+		1
+		
+		
+		iter =
+		
+		30
+		
+		
+		f_eval =
+		
+		287
+	\end{lstlisting}
+
+		
+	\section{Resultate}
+		 
+		
+			
+\end{document}
