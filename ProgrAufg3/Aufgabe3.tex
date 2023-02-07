@@ -60,7 +60,7 @@ literate =
 	\fancyhead[L]{\leftmark}
 	\renewcommand{\headrulewidth}{1.25pt}
 
-	\fancyfoot[L]{\tiny{Num. Ana. - Übung 2 , created: \today}}
+	\fancyfoot[L]{\tiny{Num. Ana. - Übung 3 , created: \today}}
 	\fancyfoot[R]{\tiny{Felix Dreßler (k12105003), Elisabeth Köberle (k12110408), Ricardo Holzapfel (k11942080)}}
 	\cfoot{}
 	\renewcommand{\footrulewidth}{1.25pt}
@@ -82,132 +82,285 @@ literate =
 \begin{document}
 \maketitle
 	
-	
-	
-	erstes ist mu = 0,1 und zweites je mit mu = 0,5
-	bricht schneller ab
-	\begin{lstlisting}
-		[x, exitflag, iter, f_eval] = solveEq(@F1, transpose(x0))
-		
-		x =
-		
-		-2.7720
-		2.0391
-		
-		
-		exitflag =
-		
-		0
-		
-		
-		iter =
-		
-		16
-		
-		
-		f_eval =
-		
-		18
-		
-		>> [x, exitflag, iter, f_eval] = solveEq(@F1, transpose(x0))
-		
-		x =
-		
-		-2.7720
-		2.0391
-		
-		
-		exitflag =
-		
-		0
-		
-		
-		iter =
-		
-		16
-		
-		
-		f_eval =
-		
-		18
-		
-		>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
-		
-		x =
-		
-		6.1017e-09
-		
-		
-		exitflag =
-		
-		1
-		
-		
-		iter =
-		
-		30
-		
-		
-		f_eval =
-		
-		425
-		
-		>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
-		
-		x =
-		
-		1.1243e-07
-		
-		
-		exitflag =
-		
-		1
-		
-		
-		iter =
-		
-		30
-		
-		
-		f_eval =
-		
-		287
-	\end{lstlisting}
+	\section{gedämpftes Jacobi-Verfahren}
+		\lstinputlisting{solveEq.m}
 
 
-	false positive
-	\begin{lstlisting}
-		>> [x, exitflag, iter, f_eval] = solveEq(@slowFun, 10)
+\newpage
+	\section{Testfunktion 1}
+		Wir testen nun die Funktion F1 aus der Angabe mit Startvektor $ x0 = \begin{pmatrix} 10 \\ 10\end{pmatrix} $
 		
-		x =
+		\begin{lstlisting}
+			
+		\end{lstlisting}
+	
+		Im Vergleich mit fsolve ergibt sich:
 		
-		35
+		\begin{lstlisting}
+			>> fsolve(@F1, [10,10]')
+			ans =
+			
+			-2.7720
+			2.0391
+			
+		\end{lstlisting}
 		
+	\section{Testfunktion2}
+		Wir testen nun die Funktion F2 aus der Angabe mit Startvektor $ x0 = \begin{pmatrix} 10 \\ 10 \\ 10 \\10 \end{pmatrix} $
 		
-		exitflag =
+		\begin{lstlisting}
+			
+		\end{lstlisting}
 		
-		0
+		Im Vergleich mit fsolve ergibt sich:
 		
+		\begin{lstlisting}
+			>> fsolve(@F2, [10, 10, 10, 10]')
+			ans =
+			
+			4.8482
+			5.2704
+			23.5149
+			3.4195	
+		\end{lstlisting}
 		
-		iter =
+	\section{Testfunktion3}
+		Nun testen wir die Funktion $ f(\begin{pmatrix} x \\ y \end{pmatrix}) = \begin{pmatrix} sin(x) \\ cos(y) \end{pmatrix}$
+		Dazu wurde folgende MatLab-Funktion verwendet:
+		\begin{lstlisting}
+			function [F, DF] = testFun(x)
+			% n = 2    
+			F= zeros(2,1);
+			F(1) = sin(x(1));
+			F(2) = cos(x(2));
+			DF = zeros(2,2);
+			DF(1,1)=cos(x(1));
+			DF(1,2)= 0;
+			DF(2,2)=-sin(x(2));
+			DF(2,1)=0;    
+			
+			end
+		\end{lstlisting}
 		
-		25
+		Im folgenden noch die Tests:
 		
+		\begin{lstlisting}
+			
+		\end{lstlisting}
 		
-		f_eval =
+		Im Vergleich mit fsolve ergibt sich:
 		
-		26
+		\begin{lstlisting}
+			>> fsolve(@testFun, [10, 10]')
+			ans =
+			
+			9.4248  
+			10.9956
+		\end{lstlisting}
+	
+	\section{Testfunktion4}
+		Nun testen wir die eindimensionale Funktion $ f(x) = e^{-x}$
+		Dazu wurde folgende MatLab-Funktion verwendet:
+		\begin{lstlisting}
+			function [F, DF] = slowFun(x)
+			% n = 1  
+			F = exp(-x);
+			DF = -exp(-x);
+			end
+		\end{lstlisting}
+	
+		Im folgenden noch die Tests:
 		
-		>> slowFun(35)
+		\begin{lstlisting}
+			
+		\end{lstlisting}
 		
-		ans =
+		Im Vergleich mit fsolve ergibt sich:
 		
-		6.3051e-16
-	\end{lstlisting}
+		\begin{lstlisting}
+			>> fsolve(@slowFun, 10)
+			ans = 12.000
+		\end{lstlisting}
+	
+	\section{Testfunktion5}
+		Nun testen wir die eindimensionale Funktion $ f(x) = 0$
+		Dazu wurde folgende MatLab-Funktion verwendet:
+		\begin{lstlisting}
+			function [ F, DF ] = zero( x )
+			% n = 1
+			F = 0;
+			DF = 0;
+			end
+		\end{lstlisting}
+		Diese Funktion ist interessant weil wir natürlich keine Iteration brauchen, wenn unser Ausgangswert bereits eine Nullstelle ist.
+	
+		Im folgenden noch die Tests:
+		
+		\begin{lstlisting}
+			
+		\end{lstlisting}
+		
+		Im Vergleich mit fsolve ergibt sich:
+		
+		\begin{lstlisting}
+			>> fsolve(@zero, 10)
+			ans = 10
+		\end{lstlisting}
+	
+	\section{Testfunktion6}
+		Nun testen wir die eindimensionale Funktion $ f(x) = x^2 + 1$
+		Dazu wurde folgende MatLab-Funktion verwendet:
+		\begin{lstlisting}
+			function [ F, DF ] = noRoot( x )
+			% n = 1
+			F = x.*x + 1;
+			DF = 2.*x;
+			end
+		\end{lstlisting}
+		Diese Funktion besitzt keine Nullstelle, deshalb sollten wir hier nach der maximalen Iterationszahl auch abbrechen.
+	
+		Im folgenden noch die Tests:
+		
+		\begin{lstlisting}
+			
+		\end{lstlisting}
+		
+		Im Vergleich mit fsolve ergibt sich:
+		
+		\begin{lstlisting}
+			>> fsolve(@noRoot, 10)
+			ans = -2.0678e-05
+		\end{lstlisting}
+	
+	
 
 		
 	\section{Resultate}
-		 
+		 mu probiert
+		 iter auf 30 weil passt für alle
+		 keine nullstelle - könnte gegen minimum konvergieren
+		
+		
+		erstes ist mu = 0,1 und zweites je mit mu = 0,5
+		bricht schneller ab
+		\begin{lstlisting}
+			[x, exitflag, iter, f_eval] = solveEq(@F1, transpose(x0))
+			
+			x =
+			
+			-2.7720
+			2.0391
+			
+			
+			exitflag =
+			
+			0
+			
+			
+			iter =
+			
+			16
+			
+			
+			f_eval =
+			
+			18
+			
+			>> [x, exitflag, iter, f_eval] = solveEq(@F1, transpose(x0))
+			
+			x =
+			
+			-2.7720
+			2.0391
+			
+			
+			exitflag =
+			
+			0
+			
+			
+			iter =
+			
+			16
+			
+			
+			f_eval =
+			
+			18
+			
+			>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
+			
+			x =
+			
+			6.1017e-09
+			
+			
+			exitflag =
+			
+			1
+			
+			
+			iter =
+			
+			30
+			
+			
+			f_eval =
+			
+			425
+			
+			>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
+			
+			x =
+			
+			1.1243e-07
+			
+			
+			exitflag =
+			
+			1
+			
+			
+			iter =
+			
+			30
+			
+			
+			f_eval =
+			
+			287
+		\end{lstlisting}
+		
+		
+		false positive
+		\begin{lstlisting}
+			>> [x, exitflag, iter, f_eval] = solveEq(@slowFun, 10)
+			
+			x =
+			
+			35
+			
+			
+			exitflag =
+			
+			0
+			
+			
+			iter =
+			
+			25
+			
+			
+			f_eval =
+			
+			26
+			
+			>> slowFun(35)
+			
+			ans =
+			
+			6.3051e-16
+		\end{lstlisting}
 		
 			
 \end{document}

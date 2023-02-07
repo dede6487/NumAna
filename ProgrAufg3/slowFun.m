@@ -1,5 +1,5 @@
 function [F, DF] = slowFun(x)
-% n = 2    
+% n = 1  
     F = exp(-x);
     DF = -exp(-x);
 end
