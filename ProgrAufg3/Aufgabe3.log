@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.4.4)  7 FEB 2023 14:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.4.4)  8 FEB 2023 12:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -533,7 +533,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {f:/Anwendungen/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 86
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 89
 .
 
 (f:/Anwendungen/texlive/2021/texmf-dist/tex/latex/psnfss/t1pcr.fd
@@ -542,26 +542,26 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 e{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.89 \newpage
+l.92 \newpage
               [1]
 LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 1
-00.
+23.
 
 (f:/Anwendungen/texlive/2021/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 ) [2]
-[3] [4] [5] [6] (./Aufgabe3.aux)
+[3] [4] [5] [6] [7] (./Aufgabe3.aux)
 Package rerunfilecheck Info: File `Aufgabe3.out' has not changed.
-(rerunfilecheck)             Checksum: E2BC0F1CEDB85A2F43D98E03452A0ACA;928.
+(rerunfilecheck)             Checksum: EB1E901654D712C3FC4B095BC252CE57;928.
  ) 
 Here is how much of TeX's memory you used:
- 13652 strings out of 478994
- 193688 string characters out of 5856172
- 835920 words of memory out of 5000000
+ 13730 strings out of 478994
+ 194839 string characters out of 5856172
+ 836920 words of memory out of 5000000
  30683 multiletter control sequences out of 15000+600000
  415912 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,12n,74p,234b,1918s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,12n,74p,277b,1918s stack positions out of 5000i,500n,10000p,200000b,80000s
 {f:/Anwendungen/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.
 enc}{f:/Anwendungen/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}<f:/Anw
 endungen/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><f:/
@@ -570,18 +570,19 @@ f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 ><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
 fb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
 pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-8.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1
-440.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfr
-m0600.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-super/s
-frm0900.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-super
-/sfrm1095.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-sup
-er/sfrm1200.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-s
-uper/sfrm1728.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/urw/couri
-er/ucrr8a.pfb>
-Output written on Aufgabe3.pdf (7 pages, 202087 bytes).
+10.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy8.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sf
+bx1440.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-super/
+sfrm0600.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-supe
+r/sfrm0900.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-su
+per/sfrm1095.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/cm-
+super/sfrm1200.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/public/c
+m-super/sfrm1728.pfb><f:/Anwendungen/texlive/2021/texmf-dist/fonts/type1/urw/co
+urier/ucrr8a.pfb>
+Output written on Aufgabe3.pdf (8 pages, 218595 bytes).
 PDF statistics:
- 408 PDF objects out of 1000 (max. 8388607)
- 382 compressed objects within 4 object streams
- 245 named destinations out of 1000 (max. 500000)
+ 509 PDF objects out of 1000 (max. 8388607)
+ 480 compressed objects within 5 object streams
+ 323 named destinations out of 1000 (max. 500000)
  65 words of extra memory for PDF output out of 10000 (max. 10000000)
 
