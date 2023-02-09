@@ -82,9 +82,9 @@ literate =
 \begin{document}
 \maketitle
 	
-	\section{gedämpftes Newton-Verfahren}
-		Im folgenden die Implementierung des gedämpften Newton-Verfahrens. Die Wahl von $maxIter$ basiert auf den unten angeführten Tests und gibt eine realistische obere Schranke für Konvergenz des Verfahrens. (genaueres zu F2 in den Resultaten)
-		Der Wert $mu$ wird im Abbruchskriterium verwendet. Es muss gelten $mu \in [0,1]$. Die Wahl von $ mu = 0.1$ basiert auf einer Empfehlung des Skripts.
+	\section{Gedämpftes Newton-Verfahren}
+		Im Folgenden die Implementierung des gedämpften Newton-Verfahrens. Die Wahl von $maxIter$ basiert auf den unten angeführten Tests. Da aber bis auf F2 alle Tests sehr schnell konvergiert sind wäre hier eine Obergrenze als zusätzlichen Eingabewert vorstellbar.
+		Der Wert $mu$ wird im Abbruchskriterium verwendet. Es muss gelten $mu \in (0,1)$. Die Wahl von $ mu = 0.1$ basiert auf einer Empfehlung des Skripts.
 	
 		\lstinputlisting{solveEq.m}
 
@@ -123,18 +123,40 @@ literate =
 			>> fsolve(@F1, [10,10]')
 			ans =
 			
-			-2.7720
-			2.0391
+			-2.772012304541454
+			2.039147040681558
 			
 		\end{lstlisting}
 		
 		Die beiden Lösungen liegen also sehr Nahe beieinander.
 		
-	\section{Testfunktion2}
+	\section{Testfunktion 2}
 		Wir testen nun die Funktion F2 aus der Angabe mit Startvektor $ x0 = \begin{pmatrix} 10 \\ 10 \\ 10 \\10 \end{pmatrix} $
 		
 		\begin{lstlisting}
+			>> [x, exitflag, iter, f_eval] = solveEq(@F2, x0)
 			
+			x =
+			
+			1.0000
+			1.0000
+			1.0000
+			1.0000
+			
+			
+			exitflag =
+			
+			0
+			
+			
+			iter =
+			
+			6640
+			
+			
+			f_eval =
+			
+			45477
 		\end{lstlisting}
 		
 		Im Vergleich mit fsolve ergibt sich:
@@ -143,13 +165,15 @@ literate =
 			>> fsolve(@F2, [10, 10, 10, 10]')
 			ans =
 			
-			4.8482
-			5.2704
-			23.5149
-			3.4195	
+			4.848236170601711e+00
+			5.270367336154218e+00
+			2.351493533714051e+01
+			3.419479931504654e+00	
 		\end{lstlisting}
 		
-	\section{Testfunktion3}
+		Die Funktion konvergiert erst sehr spät und gegen eine ganz andere Nullstelle als fsolve.
+		
+	\section{Testfunktion 3}
 		Nun testen wir die Funktion $ f(\begin{pmatrix} x \\ y \end{pmatrix}) = \begin{pmatrix} sin(x) \\ cos(y) \end{pmatrix}$
 		Dazu wurde folgende MatLab-Funktion verwendet:
 		\begin{lstlisting}
@@ -167,7 +191,7 @@ literate =
 			end
 		\end{lstlisting}
 		
-		Im folgenden noch die Tests:
+		Im Folgenden noch die Tests:
 		
 		\begin{lstlisting}
 			>> [x, exitflag, iter, f_eval] = solveEq(@testFun, x0)
@@ -199,13 +223,13 @@ literate =
 			>> fsolve(@testFun, [10, 10]')
 			ans =
 			
-			9.4248  
-			10.9956
+			9.424777960769379e+00   
+			1.099557428756411e+01
 		\end{lstlisting}
 	
 		Wir erhalten also einen sehr ähnlichen Wert.
 	
-	\section{Testfunktion4}
+	\section{Testfunktion 4}
 		Nun testen wir die eindimensionale Funktion $ f(x) = e^{-x}$
 		Dazu wurde folgende MatLab-Funktion verwendet:
 		\begin{lstlisting}
@@ -216,7 +240,7 @@ literate =
 			end
 		\end{lstlisting}
 	
-		Im folgenden noch die Tests:
+		Im Folgenden noch die Tests:
 		
 		\begin{lstlisting}
 			>> [x, exitflag, iter, f_eval] = solveEq(@slowFun, 10)
@@ -245,12 +269,12 @@ literate =
 		
 		\begin{lstlisting}
 			>> fsolve(@slowFun, 10)
-			ans = 12.000
+			ans = 12.00000015661689
 		\end{lstlisting}
 	
-		hier erhalten wir unterschiedliche Nullstellen (obwohl die Funktion natürlich keine Nullstelle hat). Das liegt vermutlich an einer anderen Genauigkeit der fsolve Funktion im Vergleich zu unserer Implementierung
+		Hier erhalten wir unterschiedliche Nullstellen (obwohl die Funktion natürlich keine Nullstelle hat). Das liegt vermutlich an einer anderen Genauigkeit der fsolve Funktion im Vergleich zu unserer Implementierung.
 		
-	\section{Testfunktion5}
+	\section{Testfunktion 5}
 		Nun testen wir die eindimensionale Funktion $ f(x) = 0$
 		Dazu wurde folgende MatLab-Funktion verwendet:
 		\begin{lstlisting}
@@ -262,7 +286,7 @@ literate =
 		\end{lstlisting}
 		Diese Funktion ist interessant weil wir natürlich keine Iteration brauchen, wenn unser Ausgangswert bereits eine Nullstelle ist.
 	
-		Im folgenden noch die Tests:
+		Im Folgenden noch die Tests:
 		
 		\begin{lstlisting}
 			>> [x, exitflag, iter, f_eval] = solveEq(@zero, 10)
@@ -296,7 +320,7 @@ literate =
 	
 			Klarerweise geben beide Funktionen wieder x0 zurück.
 	
-	\section{Testfunktion6}
+	\section{Testfunktion 6}
 		Nun testen wir die eindimensionale Funktion $ f(x) = x^2 + 1$
 		Dazu wurde folgende MatLab-Funktion verwendet:
 		\begin{lstlisting}
@@ -308,9 +332,161 @@ literate =
 		\end{lstlisting}
 		Diese Funktion besitzt keine Nullstelle, deshalb sollten wir hier nach der maximalen Iterationszahl auch abbrechen.
 	
-		Im folgenden noch die Tests:
+		Im Folgenden noch die Tests:
 		
 		\begin{lstlisting}
+			>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
+			
+			x =
+			
+			5.804278938784031e-09
+			
+			
+			exitflag =
+			
+			1
+			
+			
+			iter =
+			
+			10000
+			
+			
+			f_eval =
+			
+			206860
+		\end{lstlisting}
+		
+		Im Vergleich mit fsolve ergibt sich:
+		
+		\begin{lstlisting}
+			>> fsolve(@noRoot, 10)
+			ans = -2.067788544313703e-05
+		\end{lstlisting}
+	
+			Obwohl die Funktion keine Nullstelle besitzt erhalten wir bereits gut Approximationen für das Minimum ($x=0$) der Funktion. 
+
+		
+	\section{Resultate}
+		Testfunktion 6 gibt Grund zur Vermutung, dass das Verfahren in manchen Fällen gegen ein Minimum der Funktion konvergiert, falls keine Nullstelle vorhanden ist. 
+		
+		
+		Versucht man verschiedene Werte für $mu$ wird die Eingabefunktion $fun$ weniger oft aufgerufen. Das führt bei nicht-Konvergenz dann auch zu einem schnelleren Abbruch. 
+		Das tritt jedoch nur bei kleinen $maxIter$ auf.
+		Im Folgenden zwei Versuche mit unterschiedlichen $mu$ und unterschiedlichen $maxIter$:
+		
+		Bei F1 erkennt man mit $mu = 0.5$ keinen Unterschied zu $mu = 0.1$:
+		\begin{lstlisting}
+			
+			mu = 0.1
+			
+			[x, exitflag, iter, f_eval] = solveEq(@F1, transpose(x0))
+			
+			x =
+			
+			-2.772012301967051
+			2.039147038513721
+			
+			
+			exitflag =
+			
+			0
+			
+			
+			iter =
+			
+			16
+			
+			
+			f_eval =
+			
+			18
+			
+			------------------------------------------------------------------------------
+			
+			mu = 0.5
+			
+			>> [x, exitflag, iter, f_eval] = solveEq(@F1, transpose(x0))
+			
+			x =
+			
+			-2.772012301967051
+			2.039147038513721
+			
+			
+			exitflag =
+			
+			0
+			
+			
+			iter =
+			
+			16
+			
+			
+			f_eval =
+			
+			18
+			
+			
+		\end{lstlisting}
+	
+	
+		Bei $noRoot$ wird ist der Unterschied vor Allem bei kleinen $maxIter$ sichtbar.
+		\begin{lstlisting}
+			
+			mu = 0.1 und maxIter = 10 000
+			
+			>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
+			
+			x =
+			
+			-2.180283036959048e-09
+			
+			
+			exitflag =
+			
+			1
+			
+			
+			iter =
+			
+			10000
+			
+			
+			f_eval =
+			
+			206759
+			
+			------------------------------------------------------------------------------
+			
+			mu = 0.5 und maxIter = 10 000
+			
+			>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
+			
+			x =
+			
+			5.804278938784031e-09
+			
+			
+			exitflag =
+			
+			1
+			
+			
+			iter =
+			
+			10000
+			
+			
+			f_eval =
+			
+			206860
+			
+			------------------------------------------------------------------------------
+			
+			mu = 0.1 und maxIter = 30
+			
 			>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
 			
 			x =
@@ -331,104 +507,16 @@ literate =
 			f_eval =
 			
 			425
-		\end{lstlisting}
-		
-		Im Vergleich mit fsolve ergibt sich:
-		
-		\begin{lstlisting}
-			>> fsolve(@noRoot, 10)
-			ans = -2.0678e-05
-		\end{lstlisting}
-	
-			Obwohl die Funktion keine Nullstelle besitzt erhalten wir bereits gut Approximationen für das Minimum ($x=0$) der Funktion. 
-
-		
-	\section{Resultate}
-		Testfunktion 6 gibt Grund zur Vermutung, dass das Verfahren in manchen Fällen gegen ein Minnimum der Funktion konvergiert, falls keine Nullstelle vorhanden ist. 
-		
-		
-		Versucht man verschiedene Werte für $mu$ wird die Eingabefunktion $fun$ weniger oft aufgerufen. Das führt bei nicht-Konvergenz dann auch zu einem schnelleren Abbruch. Im folgenden zwei Versuche mit unterschiedlichen $mu$:
-		
-		$mu = 0.1$
-		\begin{lstlisting}
-			[x, exitflag, iter, f_eval] = solveEq(@F1, transpose(x0))
 			
-			x =
+			------------------------------------------------------------------------------
 			
-			-2.7720
-			2.0391
-			
-			
-			exitflag =
-			
-			0
-			
-			
-			iter =
-			
-			16
-			
-			
-			f_eval =
-			
-			18
-			
-			
+			mu = 0.1 und maxIter = 30
 			
 			>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
 			
 			x =
 			
-			6.1017e-09
-			
-			
-			exitflag =
-			
-			1
-			
-			
-			iter =
-			
-			30
-			
-			
-			f_eval =
-			
-			425
-			
-			
-		\end{lstlisting}
-	
-	
-		$mu = 0.5$
-		\begin{lstlisting}
-			>> [x, exitflag, iter, f_eval] = solveEq(@F1, transpose(x0))
-			
-			x =
-			
-			-2.7720
-			2.0391
-			
-			
-			exitflag =
-			
-			0
-			
-			
-			iter =
-			
-			16
-			
-			
-			f_eval =
-			
-			18
-			
-			>> [x, exitflag, iter, f_eval] = solveEq(@noRoot, 10)
-			
-			x =
-			
-			1.1243e-07
+			1.124292255014039e-07
 			
 			
 			exitflag =

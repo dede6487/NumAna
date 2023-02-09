@@ -1,9 +1,9 @@
 function [x, exitflag, iter, f_eval] = solveEq(fun, x0)
     x = x0;
-    maxIter = 30;
+    maxIter = 10000;
     [F,DF] = fun(x);
     f_eval = 1;
-    mu = 0.1; % Wert aus Skript
+    mu = 0.5; % Wert aus Skript
     exitflag = 1;
     iter = 0;
     
